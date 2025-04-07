@@ -1,7 +1,13 @@
 .root{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
+
+    &__logo{
+        width: 200px;
+        margin-bottom: 40px;
+    }
 }

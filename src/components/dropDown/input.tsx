@@ -1,26 +1,42 @@
 import styles from "./input.module.scss";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { dataItemInterface } from "./types";
 
 interface Props {
   placeholder: string;
   onClick: () => void;
-  data: dataItemInterface;
+  value: string;
   setValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isFocused: boolean;
 }
 
-const Input = ({ placeholder = "", data, setValue, onClick }: Props) => {
+const Input = ({
+  placeholder = "",
+  value,
+  setValue,
+  onClick,
+  isFocused,
+}: Props) => {
   return (
-    <label className={styles.root} onClick={onClick}>
+    <div
+      className={`${styles.root} ${isFocused && styles["root--focused"]}`}
+      onClick={onClick}
+    >
       <input
         className={styles.root__input}
         type="text"
         placeholder={placeholder}
-        value={data.text}
+        value={value}
         onChange={setValue}
+        name="newItem"
+        autoComplete={"off"}
       />
-      <MdOutlineKeyboardArrowDown className={styles.root__arrowIcon} />
-    </label>
+      <MdOutlineKeyboardArrowDown
+        className={`${styles.root__arrowIcon} ${
+          isFocused && styles["root__arrowIcon--rotate"]
+        }`}
+      />
+    </div>
   );
 };
+
 export default Input;

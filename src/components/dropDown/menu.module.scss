@@ -6,15 +6,36 @@
     max-height: 300px;
     border: 1px solid palette.$primary-border-light;
     color: palette.$primary-content;
-    padding: 10px;
+    padding: 8px;
     font-size: 0.9rem;
     background: white;
     position: absolute;
     margin-top: 5px;
     left: 0;
     right: 0;
-
+    max-height: 200px;
+    overflow-y: auto;
+    
+    
     &__noOption{
         margin: 0;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        margin: 2px 0;
+        font-size: 0.9rem;
     }
+}
+
+.root::-webkit-scrollbar-button{
+    display: none;
+}
+
+.root::-webkit-scrollbar {
+    width: 6px; 
+}
+
+.root::-webkit-scrollbar-thumb {
+    background-color: #C5C7C9; 
+    border-radius: 4px;
 }

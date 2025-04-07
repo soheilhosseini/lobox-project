@@ -4,24 +4,43 @@
     border-radius: 6px;
     color: palette.$primary-content;
     cursor: pointer;
-    padding: 6px 8px;
+    padding: 8px 8px;
     background-color: transparent;
     border: none;
     width: 100%;
     text-align: left;
     display: flex;
     align-items: center;
-
+    margin: 2px 0;
+    font-size: 0.9rem;
     &__icon{
         margin-left: 10px;
         display: flex;
         align-items: center;
     }
+
+    &--selected{
+        background-color: palette.$secondary-content-light;
+        color: palette.$secondary-content-dark
+    }
+
+    &__textIconContainer{
+        flex:1
+    }
+
+    &__tickIconContainer{
+        display: flex;
+        align-items: center;
+    }
+
+    &__tickIcon{
+        font-size: 16px;
+    }
 }
 
 .root:hover{
     background-color: palette.$secondary-content-light ;
-    color: palette.$secondary-content
+    color: palette.$secondary-content-dark
 }
 
 .root:disabled{

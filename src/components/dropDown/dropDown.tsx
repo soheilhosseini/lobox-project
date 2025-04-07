@@ -1,67 +1,58 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./dropDown.module.scss";
 import Input from "./input";
 import Menu from "./menu";
 import { dataItemInterface } from "./types";
-import { CiHeart } from "react-icons/ci";
-import { FaGlassMartiniAlt } from "react-icons/fa";
-const mockData = [
-  {
-    text: "Education",
-    value: "education",
-    icon: <CiHeart />,
-  },
-  {
-    text: "Art",
-    value: "art",
-    icon: <FaGlassMartiniAlt />,
-  },
-];
+import useIfClickedOnElement from "../../hooks/useIfClickedOnElement";
 
-const DropDown = () => {
-  const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState<dataItemInterface>({
-    text: "",
-    value: "",
-    icon: <></>,
-  });
+interface Props {
+  list: dataItemInterface[];
+  handleAdd: (value: string) => void;
+}
+
+const DropDown = ({ list, handleAdd }: Props) => {
+  const [isFocused, setIsFocused] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  useIfClickedOnElement({ ref, callback: setIsFocused });
+  const [selectedItemId, setSelectedItemId] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
-  useEffect(() => {
-    document.addEventListener("click", handleClickOut);
-    return () => document.removeEventListener("click", handleClickOut);
-  }, []);
+  const handleOpenMenu = () => setIsFocused(true);
 
-  const handleOpenMenu = () => setOpen(true);
+  const handleItemClicked = (item: dataItemInterface) => {
+    setInputValue(item.text);
+    setSelectedItemId(item._id);
+  };
 
-  const handleClickOut = (e: MouseEvent) => {
-    if (ref?.current) {
-      setOpen(ref.current.contains(e.target as Node));
+  const handleSetInputValue = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setInputValue(e.target.value);
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const newItem = formData.get("newItem")?.toString();
+    if (newItem) {
+      handleAdd(newItem);
+      setInputValue("");
     }
   };
 
-  const handleItemClicked = (data: dataItemInterface) => {
-    setInputValue(data);
-    handleClose();
-  };
-
-  const handleClose = () => setOpen(false);
-
-  const handleSetInputValue = (e) => setInputValue(e.target.value);
-
   return (
     <div className={styles.root} ref={ref} id="dropDownRoot">
-      <Input
-        data={inputValue}
-        setValue={handleSetInputValue}
-        placeholder="Write Here"
-        onClick={handleOpenMenu}
-      />
-      {open && (
+      <form onSubmit={handleFormSubmit}>
+        <Input
+          value={inputValue}
+          setValue={handleSetInputValue}
+          placeholder="Write, then press Enter to add"
+          onClick={handleOpenMenu}
+          isFocused={isFocused}
+        />
+      </form>
+      {isFocused && (
         <Menu
-          handleClose={handleClose}
           onClick={handleItemClicked}
-          data={mockData}
+          data={list}
+          selectedItemId={selectedItemId}
         />
       )}
     </div>

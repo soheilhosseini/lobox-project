@@ -7,5 +7,6 @@ $primary-content-dark: color.adjust($primary-content, $lightness: -15%);
 $primary-border: rgb(197, 197, 197);
 $primary-border-light: #EEEEEE;
 
-$secondary-content: #657ACB;
-$secondary-content-light: color.adjust($secondary-content , $lightness: 38%)
+$secondary-content: #C2CAF7;
+$secondary-content-light: #F1F4FF;
+$secondary-content-dark: #8291C9

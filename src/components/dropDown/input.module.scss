@@ -2,44 +2,49 @@
 @use '../../styles/generalVariables' as variables;
 
 .root{
-
     position: relative;
+    border-radius: variables.$primary-border-radius;
+    border: 2px solid palette.$primary-border;
+    min-width: 250px;
+    cursor: pointer;
+    transition: 100ms;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: white;
 
     &__input{
-        border-radius: variables.$primary-border-radius;
-        padding: 10px 30px 10px 10px;    
-        border: 1px solid palette.$primary-border;
+        flex:1;
+        border: none;
         outline: none;
-        min-width: 150px;
         font-size: 0.9rem;
         color: palette.$primary-content;
+        box-shadow: none!important;
+        padding: 10px;  
         cursor: pointer;
-        transition: 100ms;
-        display: block;
-    }
+}
     
     &__input::placeholder{
         color: palette.$primary-content-light
     }
-    
-    &__input:focus{
-        box-shadow: 0 0 6px  #D6E1FF;
-        border-color:  #8A99DB;
-
-    }
-
-    &__input:focus + &__arrowIcon{
-        transform: rotate(180deg);
-    }
 
     &__arrowIcon{
-        position: absolute;
         color: palette.$primary-content-light;
-        right: 10px;
-        top: 8px;
-        margin: auto;
         font-size: 24px;
         cursor: pointer;
         transition: 200ms;
+        width: 30px;
+        &--rotate{
+            transform: rotate(180deg);
+        }
+    }
+
+    &--focused{
+        box-shadow: 0 0 6px palette.$secondary-content;
+        border-color:  palette.$secondary-content-dark;
+        border-width: 2px;
     }
 }
+
+
+

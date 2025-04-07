@@ -5,18 +5,23 @@ import { dataItemInterface } from "./types";
 interface Props {
   onClick: (data: dataItemInterface) => void;
   data: dataItemInterface[];
-  handleClose: () => void;
+  selectedItemId: string;
 }
 
-const Menu = ({ onClick, handleClose, data = [] }: Props) => {
+const Menu = ({ onClick, data = [], selectedItemId }: Props) => {
   return (
     <div className={styles.root}>
       {data.length > 0 ? (
-        data.map((item) => <MenuItem data={item} onClick={onClick} />)
+        data.map((item) => (
+          <MenuItem
+            key={item.value}
+            data={item}
+            onClick={onClick}
+            isSelected={item._id === selectedItemId}
+          />
+        ))
       ) : (
-        <p className={styles.root__noOption} onClick={handleClose}>
-          No Option
-        </p>
+        <p className={styles.root__noOption}>No Option</p>
       )}
     </div>
   );
