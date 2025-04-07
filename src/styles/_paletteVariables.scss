@@ -1,0 +1,5 @@
+@use "sass:color";
+
+$primary-content: #838689;
+$primary-content-light: color.adjust($primary-content, $lightness: 15%);
+$primary-content-dark: color.adjust($primary-content, $lightness: -15%);
