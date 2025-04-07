@@ -8,14 +8,14 @@
     &__input{
         border-radius: variables.$primary-border-radius;
         padding: 10px 30px 10px 10px;    
-        border: 1px solid rgb(197, 197, 197);
+        border: 1px solid palette.$primary-border;
         outline: none;
         min-width: 150px;
         font-size: 0.9rem;
         color: palette.$primary-content;
         cursor: pointer;
         transition: 100ms;
-
+        display: block;
     }
     
     &__input::placeholder{
@@ -25,7 +25,7 @@
     &__input:focus{
         box-shadow: 0 0 6px  #D6E1FF;
         border-color:  #8A99DB;
-        border-width: 2px;
+
     }
 
     &__input:focus + &__arrowIcon{

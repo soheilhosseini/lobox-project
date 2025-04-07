@@ -1,0 +1,31 @@
+@use '../../styles/paletteVariables' as palette;
+
+.root{
+    border-radius: 6px;
+    color: palette.$primary-content;
+    cursor: pointer;
+    padding: 6px 8px;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+
+    &__icon{
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.root:hover{
+    background-color: palette.$secondary-content-light ;
+    color: palette.$secondary-content
+}
+
+.root:disabled{
+    background-color: transparent ;
+    color: palette.$primary-content;
+    cursor: auto;
+}

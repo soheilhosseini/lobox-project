@@ -1,10 +1,10 @@
 import styles from "./App.module.scss";
-import Input from "./components/dropDown/input";
+import DropDown from "./components/dropDown/dropDown";
 
 function App() {
   return (
     <div className={styles.root}>
-      <Input placeholder="Write Here" />
+      <DropDown />
     </div>
   );
 }

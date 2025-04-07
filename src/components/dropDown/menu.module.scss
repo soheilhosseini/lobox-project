@@ -1,0 +1,20 @@
+@use '../../styles/paletteVariables' as palette;
+@use '../../styles/generalVariables' as variables;
+
+.root{
+    border-radius: variables.$primary-border-radius;
+    max-height: 300px;
+    border: 1px solid palette.$primary-border-light;
+    color: palette.$primary-content;
+    padding: 10px;
+    font-size: 0.9rem;
+    background: white;
+    position: absolute;
+    margin-top: 5px;
+    left: 0;
+    right: 0;
+
+    &__noOption{
+        margin: 0;
+    }
+}

@@ -3,3 +3,9 @@
 $primary-content: #838689;
 $primary-content-light: color.adjust($primary-content, $lightness: 15%);
 $primary-content-dark: color.adjust($primary-content, $lightness: -15%);
+
+$primary-border: rgb(197, 197, 197);
+$primary-border-light: #EEEEEE;
+
+$secondary-content: #657ACB;
+$secondary-content-light: color.adjust($secondary-content , $lightness: 38%)
