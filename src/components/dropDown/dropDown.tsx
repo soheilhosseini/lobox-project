@@ -29,7 +29,7 @@ const DropDown = ({ list, handleAdd }: Props) => {
           acc +
           list
             .find((item) => item._id === _id)
-            .text.replace(regex, "")
+            .value.replace(regex, "")
             .trim() +
           " "
         );

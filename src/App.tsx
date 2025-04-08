@@ -6,22 +6,25 @@ import { v4 as uuidv4 } from "uuid";
 import LoboxLogo from "./assets/logoWithText.png";
 
 const mockData: dataItemInterface[] = [
-  { text: "Education 🎓", value: "education", _id: uuidv4() },
-  { text: "Art 🎭", value: "art", _id: uuidv4() },
-  { text: "Sport ⚽️", value: "sport", _id: uuidv4() },
+  { text: "Education 🎓", value: "Education", _id: uuidv4() },
+  { text: "Art 🎭", value: "Art", _id: uuidv4() },
+  { text: "Sport ⚽️", value: "Sport", _id: uuidv4() },
+  { text: "Yeeeeeeh , science! ⚗️", value: "Science", _id: uuidv4() },
 ];
 
 function App() {
   const [list, setList] = useState(mockData);
 
   const apiSimulation = (value: string) => {
-    const transformedText = value.trim().toLowerCase();
-    const isDuplicated = list.some((item) => item.value === transformedText);
+    const trimmedText = value.trim();
+    const isDuplicated = list.some(
+      (item) => item.value.toLowerCase() === trimmedText.toLowerCase()
+    );
 
     if (!isDuplicated) {
       const newItem: dataItemInterface = {
-        text: value.trim(),
-        value: transformedText,
+        text: trimmedText,
+        value: trimmedText,
         _id: uuidv4(),
       };
       setList((prev) => [newItem, ...prev]);
