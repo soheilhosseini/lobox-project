@@ -18,7 +18,6 @@ const MenuItem = ({ data, onClick, isSelected }: Props) => {
         <span className={isSelected ? styles["root__text--selected"] : ""}>
           {data.text}
         </span>
-        <span className={styles.root__icon}>{data.icon}</span>
       </div>
       {isSelected && (
         <span className={styles.root__tickIconContainer}>

@@ -4,14 +4,12 @@ import Input from "./input";
 import Menu from "./menu";
 import { dataItemInterface } from "./types";
 import useIfClickedOnElement from "../../hooks/useIfClickedOnElement";
+import { emojisRegex } from "../../constants";
 
 interface Props {
   list: dataItemInterface[];
   handleAdd: (value: string) => void;
 }
-
-const regex =
-  /([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD800-\uDFFF]|[\uFE00-\uFE0F]|\u200D|[\u2600-\u26FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDFFF])/g;
 
 const DropDown = ({ list, handleAdd }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -29,7 +27,7 @@ const DropDown = ({ list, handleAdd }: Props) => {
           acc +
           list
             .find((item) => item._id === _id)
-            .value.replace(regex, "")
+            ?.value.replace(emojisRegex, "")
             .trim() +
           " "
         );
@@ -51,7 +49,7 @@ const DropDown = ({ list, handleAdd }: Props) => {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const newItem = formData.get("newItem")?.toString();
+    const newItem = formData.get("newItem") as string;
     if (newItem) {
       handleAdd(newItem);
       setInputValue("");
