@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./dropDown.module.scss";
 import Input from "./input";
 import Menu from "./menu";
@@ -14,14 +14,26 @@ const DropDown = ({ list, handleAdd }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
   useIfClickedOnElement({ ref, callback: setIsFocused });
-  const [selectedItemId, setSelectedItemId] = useState("");
+  const [selectedItemIds, setSelectedItemIds] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
 
   const handleOpenMenu = () => setIsFocused(true);
 
+  useEffect(() => {
+    setInputValue(
+      selectedItemIds.reduce(
+        (acc, _id) => acc + list.find((item) => item._id === _id).text + " ",
+        ""
+      )
+    );
+  }, [selectedItemIds, list]);
+
   const handleItemClicked = (item: dataItemInterface) => {
-    setInputValue(item.text);
-    setSelectedItemId(item._id);
+    if (selectedItemIds.includes(item._id)) {
+      setSelectedItemIds((prev) => prev.filter((_id) => item._id !== _id));
+    } else {
+      setSelectedItemIds((prev) => [...prev, item._id]);
+    }
   };
 
   const handleSetInputValue = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -52,7 +64,7 @@ const DropDown = ({ list, handleAdd }: Props) => {
         <Menu
           onClick={handleItemClicked}
           data={list}
-          selectedItemId={selectedItemId}
+          selectedItemIds={selectedItemIds}
         />
       )}
     </div>

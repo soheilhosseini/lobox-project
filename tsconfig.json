@@ -1,4 +1,11 @@
 {
+  "compilerOptions": {
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "allowUnreachableCode": false,
+    "sourceMap": true
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

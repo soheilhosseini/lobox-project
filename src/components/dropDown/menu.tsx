@@ -5,10 +5,10 @@ import { dataItemInterface } from "./types";
 interface Props {
   onClick: (data: dataItemInterface) => void;
   data: dataItemInterface[];
-  selectedItemId: string;
+  selectedItemIds: string[];
 }
 
-const Menu = ({ onClick, data = [], selectedItemId }: Props) => {
+const Menu = ({ onClick, data = [], selectedItemIds }: Props) => {
   return (
     <div className={styles.root}>
       {data.length > 0 ? (
@@ -17,7 +17,7 @@ const Menu = ({ onClick, data = [], selectedItemId }: Props) => {
             key={item.value}
             data={item}
             onClick={onClick}
-            isSelected={item._id === selectedItemId}
+            isSelected={selectedItemIds.includes(item._id)}
           />
         ))
       ) : (
