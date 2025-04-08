@@ -5,7 +5,11 @@ import { dataItemInterface } from "./components/dropDown/types";
 import { v4 as uuidv4 } from "uuid";
 import LoboxLogo from "./assets/logoWithText.png";
 
-const mockData: dataItemInterface[] = [];
+const mockData: dataItemInterface[] = [
+  { text: "Education 🎓", value: "education", _id: uuidv4() },
+  { text: "Art 🎭", value: "art", _id: uuidv4() },
+  { text: "Sport ⚽️", value: "sport", _id: uuidv4() },
+];
 
 function App() {
   const [list, setList] = useState(mockData);
@@ -15,10 +19,9 @@ function App() {
     const isDuplicated = list.some((item) => item.value === transformedText);
 
     if (!isDuplicated) {
-      const newItem = {
+      const newItem: dataItemInterface = {
         text: value.trim(),
         value: transformedText,
-        icon: <></>,
         _id: uuidv4(),
       };
       setList((prev) => [newItem, ...prev]);

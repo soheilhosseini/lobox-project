@@ -10,6 +10,9 @@ interface Props {
   handleAdd: (value: string) => void;
 }
 
+const regex =
+  /([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD800-\uDFFF]|[\uFE00-\uFE0F]|\u200D|[\u2600-\u26FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDFFF])/g;
+
 const DropDown = ({ list, handleAdd }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -21,10 +24,16 @@ const DropDown = ({ list, handleAdd }: Props) => {
 
   useEffect(() => {
     setInputValue(
-      selectedItemIds.reduce(
-        (acc, _id) => acc + list.find((item) => item._id === _id).text + " ",
-        ""
-      )
+      selectedItemIds.reduce((acc, _id) => {
+        return (
+          acc +
+          list
+            .find((item) => item._id === _id)
+            .text.replace(regex, "")
+            .trim() +
+          " "
+        );
+      }, "")
     );
   }, [selectedItemIds, list]);
 
@@ -46,6 +55,7 @@ const DropDown = ({ list, handleAdd }: Props) => {
     if (newItem) {
       handleAdd(newItem);
       setInputValue("");
+      setSelectedItemIds([]);
     }
   };
 
